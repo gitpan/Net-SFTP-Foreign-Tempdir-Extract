@@ -6,7 +6,7 @@ use File::Tempdir qw{};
 use Net::SFTP::Foreign qw{};
 use Net::SFTP::Foreign::Tempdir::Extract::File;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 NAME
 
@@ -26,9 +26,9 @@ This is a typical implementation
 
   package My::SFTP;
   use base qw{Net::SFTP::Foreign::Tempdir::Extract};
-  sub _host_default {return "myserver.mydomain.tld"};
-  sub _folder_default {return "/myfolder"};
-  sub _match_default {return qr/\Amyfile\.zip\Z/}
+  sub host   {"myserver.mydomain.tld"};
+  sub folder {"/myfolder"};
+  sub match  {qr/\Amyfile\.zip\Z/};
 
 Then in script
 

@@ -3,6 +3,10 @@ Revision history for Perl module Net::SFTP::Foreign::Tempdir::Extract
 TODO
   File->export method to support more archive formats
 
+0.05 2014-08-27
+  - Fixed requirement for Archive::Zip
+  - Added example scripts to distribution
+  
 0.04 2014-08-21
   - File Object
     - Refactured to drop use of chdir to support relative zip file names

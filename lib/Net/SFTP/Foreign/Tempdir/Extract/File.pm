@@ -5,7 +5,7 @@ use base qw{Path::Class::File};
 use File::Tempdir qw{};
 use Archive::Zip qw(AZ_OK); #TODO use Archive::Extract instead
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 NAME
 

@@ -1,5 +1,5 @@
 Name:           perl-Net-SFTP-Foreign-Tempdir-Extract
-Version:        0.04
+Version:        0.05
 Release:        1%{?dist}
 Summary:        Secure FTP client integrating SFTP, Tempdir, and Archive Extraction
 License:        Distributable, see LICENSE
@@ -13,11 +13,13 @@ BuildRequires:  perl(File::Tempdir)
 BuildRequires:  perl(Net::SFTP::Foreign)
 BuildRequires:  perl(Package::New)
 BuildRequires:  perl(Path::Class)
+BuildRequires:  perl(Archive::Zip)
 BuildRequires:  perl(Test::Simple) >= 0.44
 Requires:       perl(File::Tempdir)
 Requires:       perl(Net::SFTP::Foreign)
 Requires:       perl(Package::New)
 Requires:       perl(Path::Class)
+Requires:       perl(Archive::Zip)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description

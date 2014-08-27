@@ -1,13 +1,14 @@
 --- #YAML:1.0
 name:                Net-SFTP-Foreign-Tempdir-Extract
-version:             0.04
+version:             0.05
 abstract:            Secure FTP client integrating SFTP, Tempdir, and Archive Extraction
-license:             ~
+license:             
 author:              
     - Michael R. Davis (mdavis@stopllc.com)
 generated_by:        ExtUtils::MakeMaker version 6.42
 distribution_type:   module
 requires:     
+    Archive::Zip:                  0
     File::Tempdir:                 0
     Net::SFTP::Foreign:            0
     Package::New:                  0
