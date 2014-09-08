@@ -6,11 +6,11 @@ use File::Tempdir qw{};
 use Net::SFTP::Foreign qw{};
 use Net::SFTP::Foreign::Tempdir::Extract::File;
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 =head1 NAME
 
-Net::SFTP::Foreign::Tempdir::Extract - Secure FTP client integrating SFTP, Tempdir, and Archive Extraction
+Net::SFTP::Foreign::Tempdir::Extract - Secure FTP client integrating Path::Class, Tempdir, and Archive Extraction
 
 =head1 SYNOPSIS
 
@@ -21,25 +21,43 @@ Net::SFTP::Foreign::Tempdir::Extract - Secure FTP client integrating SFTP, Tempd
                            backup => "./backup", #default is not to backup
                            delete => 1,          #default is not to delete
                           );
-
-This is a typical implementation
-
-  package My::SFTP;
-  use base qw{Net::SFTP::Foreign::Tempdir::Extract};
-  sub host   {"myserver.mydomain.tld"};
-  sub folder {"/myfolder"};
-  sub match  {qr/\Amyfile\.zip\Z/};
-
-Then in script
-
-  use My::SFTP qw{};
-  my $file=My::SFTP->new->next or exit; #SFTP file watcher...
+  my $file=$sftp->next;
 
 =head1 DESCRIPTION
 
 Secure FTP client which downloads files locally to a temp directory for operations and automatically cleans up all temp files after variables are out of scope.
 
 =head1 USAGE
+
+=head2 File Downloader
+
+This is a simple file downloader implementation
+
+  use Net::SFTP::Foreign::Tempdir::Extract;
+  my $sftp=Net::SFTP::Foreign::Tempdir::Extract->new(host=>$host, user=>$user);
+  my $file=$sftp->download($folder, $filename);
+
+=head2 File Watcher
+
+This is a simple file watcher implementation
+
+  use Net::SFTP::Foreign::Tempdir::Extract;
+  my $sftp=Net::SFTP::Foreign::Tempdir::Extract->new(host=>"myserver", user=>"myaccount", match=>qr/\.zip\Z/, folder=>"/myfolder");
+  my $file=$sftp->next or exit; #nothing to process so exit
+  print "$file";                #process file here
+
+=head2 Subclass
+
+This is a typical subclass implementation for a particular infrastructure
+
+  package My::SFTP;
+  use base qw{Net::SFTP::Foreign::Tempdir::Extract};
+  sub host   {"myserver.mydomain.tld"};
+  sub folder {"/myfolder"};
+  sub match  {qr/\Amyfile\.zip\Z/};
+  sub backup {time};
+  sub delete (1);
+  1;
 
 =head1 CONSTRUCTOR
 
@@ -80,7 +98,7 @@ sub download {
 
 =head2 next
 
-Downloads the next file in list and saves it locally to a temporary folder. Returns a Path::Class::File object or undef if there are no more files.
+Downloads the next file in list and saves it locally to a temporary folder. Returns a L<Path::Class::File> object or undef if there are no more files.
 
 =cut
 
@@ -155,6 +173,8 @@ sub user {
 
 Folder on remote SFTP server.
 
+Note: Some SFTP servers put clients in a change rooted environment.
+
 =cut
 
 sub folder {
@@ -215,6 +235,8 @@ sub delete {
 
 =head2 sftp
 
+Returns a cached connected L<Net::SFTP::Foreign> object
+
 =cut
 
 sub sftp {
@@ -254,7 +276,9 @@ The full text of the license can be found in the LICENSE file included with this
 
 =head1 SEE ALSO
 
-L<Net::SFTP::Foreign>, L<File::Tempdir>
+=head2 Building Blocks
+
+L<Path::Class::File>, L<Net::SFTP::Foreign>, L<File::Tempdir>
 
 =cut
 

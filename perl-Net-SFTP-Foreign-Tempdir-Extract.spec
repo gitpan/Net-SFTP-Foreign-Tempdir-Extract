@@ -1,8 +1,8 @@
 Name:           perl-Net-SFTP-Foreign-Tempdir-Extract
-Version:        0.05
-Release:        1%{?dist}
+Version:        0.06
+Release:        2%{?dist}
 Summary:        Secure FTP client integrating SFTP, Tempdir, and Archive Extraction
-License:        Distributable, see LICENSE
+License:        perl
 Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Net-SFTP-Foreign-Tempdir-Extract/
 Source0:        http://www.cpan.org/modules/by-module/Net/Net-SFTP-Foreign-Tempdir-Extract-%{version}.tar.gz

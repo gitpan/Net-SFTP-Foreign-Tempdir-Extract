@@ -4,7 +4,7 @@ WriteMakefile(
     VERSION_FROM => 'lib/Net/SFTP/Foreign/Tempdir/Extract.pm',
     AUTHOR       => 'Michael R. Davis (mdavis@stopllc.com)',
     ABSTRACT_FROM=> 'lib/Net/SFTP/Foreign/Tempdir/Extract.pm',
-    LICENSE      => "",
+    LICENSE      => "perl",
     PREREQ_PM    => {
                      'Test::Simple'       => 0.44,
                      'Package::New'       => 0,
